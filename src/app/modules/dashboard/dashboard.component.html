@@ -1,0 +1,140 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1>Perfume Management</h1>
+    <button class="btn btn-primary" (click)="openForm()">
+      <i class="fas fa-plus"></i> Add New Perfume
+    </button>
+  </div>
+  
+  <div class="modal" [class.active]="showForm" >
+    <div class="modal-content" >
+      <div class="modal-header">
+        <h2>{{ isEditing ? 'Edit Perfume' : 'Add New Perfume' }}</h2>
+        <button class="close-btn" (click)="closeForm()">&times;</button>
+      </div>
+      
+      <form [formGroup]="perfumeForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input 
+              type="text" 
+              id="name" 
+              formControlName="name"
+              [class.error]="getFieldError('name')"
+            >
+            <div class="error-message">{{ getFieldError('name') }}</div>
+          </div>
+          
+          <div class="form-group">
+            <label for="brand">Brand</label>
+            <input 
+              type="text" 
+              id="brand" 
+              formControlName="brand"
+              [class.error]="getFieldError('brand')"
+            >
+            <div class="error-message">{{ getFieldError('brand') }}</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea 
+            id="description" 
+            formControlName="description"
+            [class.error]="getFieldError('description')"
+            rows="3"
+          ></textarea>
+          <div class="error-message">{{ getFieldError('description') }}</div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="price">Price ($)</label>
+            <input 
+              type="number" 
+              id="price" 
+              formControlName="price"
+              [class.error]="getFieldError('price')"
+              step="0.01"
+            >
+            <div class="error-message">{{ getFieldError('price') }}</div>
+          </div>
+          
+          <div class="form-group">
+            <label for="size">Size (ml)</label>
+            <input 
+              type="number" 
+              id="size" 
+              formControlName="size"
+              [class.error]="getFieldError('size')"
+            >
+            <div class="error-message">{{ getFieldError('size') }}</div>
+          </div>
+          
+          <div class="form-group">
+            <label for="stock">Stock</label>
+            <input 
+              type="number" 
+              id="stock" 
+              formControlName="stock"
+              [class.error]="getFieldError('stock')"
+            >
+            <div class="error-message">{{ getFieldError('stock') }}</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="image">Image URL</label>
+          <input 
+            type="url" 
+            id="image" 
+            formControlName="image"
+            [class.error]="getFieldError('image')"
+          >
+          <div class="error-message">{{ getFieldError('image') }}</div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" (click)="closeForm()">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-primary" [disabled]="!perfumeForm.valid">
+            {{ isEditing ? 'Update' : 'Create' }} Perfume
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  
+  <div class="perfumes-grid">
+    <div class="perfume-card" *ngFor="let perfume of Perfumes">
+      <div class="perfume-image">
+        <img [src]="perfume.image" [alt]="perfume.name">
+      </div>
+      <div class="perfume-info">
+        <h3>{{ perfume.name }}</h3>
+        <p class="brand">{{ perfume.brand }}</p>
+        <p class="description">{{ perfume.description }}</p>
+        <div class="perfume-details">
+          <span class="price">${{ perfume.price }}</span>
+          <span class="size">{{ perfume.size }}ml</span>
+          <span class="stock" [class.low-stock]="perfume.stock < 10">
+            Stock: {{ perfume.stock }}
+          </span>
+        </div>
+        
+        <div class="card-actions">
+          <button class="btn btn-sm btn-outline" (click)="editPerfume(perfume)">
+            <i class="fas fa-edit"></i> Edit
+          </button>
+          <button class="btn btn-sm btn-danger" (click)="deletePerfume(perfume.id)">
+            <i class="fas fa-trash"></i> Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
