@@ -8,16 +8,15 @@ import { TableModule } from 'primeng/table';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { HeaderComponent } from './shared/header/header.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
-import { FooterComponent } from './shared/footer/footer.component';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
+import { AddProductComponent } from './modules/add-product/add-product.component';
 
 
 
 @NgModule({
-  declarations: [AppComponent,DashboardComponent],
+  declarations: [AppComponent,DashboardComponent, AddProductComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<aside class="sidebar">
+  <!-- Header Section -->
+  <div class="sidebar-header">
+    <div class="logo-container">
+      <img [src]="logoUrl" alt="Logo" class="logo" />
+      <h2 class="website-name">{{ websiteName }}</h2>
+    </div>
+  </div>
+
+  <!-- Navigation Section -->
+  <nav class="sidebar-nav">
+    <ul class="nav-list">
+      <li class="nav-item" 
+          *ngFor="let item of menuItems; let i = index"
+          [class.active]="isActiveRoute(item.route)"
+          (click)="setActiveItem(i)">
+        <a [href]="item.route" class="nav-link" (click)="$event.preventDefault()">
+          <i [class]="item.icon"></i>
+          <span class="nav-text">{{ item.label }}</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Footer Section -->
+  <div class="sidebar-footer">
+    <div class="user-info">
+      <div class="user-avatar">
+        <i class="fas fa-user"></i>
+      </div>
+      <div class="user-details">
+        <div class="user-name">Omar</div>
+        <div class="user-role">Admin</div>
+      </div>
+    </div>
+    
+    <div class="footer-actions">
+      <button class="action-btn logout-btn" (click)="onLogout()" title="Logout">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </button>
+    </div>
+  </div>
+</aside>

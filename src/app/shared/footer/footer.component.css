@@ -2,11 +2,13 @@
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   margin-top: auto;
+  z-index: 1000;
+  margin-left: 190px;
 }
 
 .container {
   max-width: 1200px;
-  margin: 0 auto;
+  margin-left: 0;
   padding: 0 20px;
 }
 

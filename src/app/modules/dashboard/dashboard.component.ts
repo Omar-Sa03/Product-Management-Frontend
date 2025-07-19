@@ -41,15 +41,19 @@ export class DashboardComponent implements OnInit {
   }
 
   get Perfumes(): Perfume[] {
-      return this.perfumes;
-  }
-  openForm(): void {
-    this.showForm = true;
-    this.isEditing = false;
-    this.editingId = null;
-    this.perfumeForm.reset();
+    return this.perfumes;
   }
 
+  // Statistics methods for the dashboard header
+  getTotalStock(): number {
+    return this.perfumes.reduce((total, perfume) => total + perfume.stock, 0);
+  }
+
+  getTotalValue(): number {
+    return this.perfumes.reduce((total, perfume) => total + (perfume.price * perfume.stock), 0);
+  }
+
+  // Form methods (kept for editing functionality)
   closeForm(): void {
     this.showForm = false;
     this.isEditing = false;

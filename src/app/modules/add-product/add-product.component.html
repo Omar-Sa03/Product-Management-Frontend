@@ -1,0 +1,120 @@
+<div class="container">
+  <div class="add-product-container">
+    <div class="page-header">
+      <h1>Add New Product</h1>
+      <p>Fill in the details below to add a new perfume to your inventory</p>
+    </div>
+
+    <div class="form-container">
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        <div class="form-section">
+          <h3>Basic Information</h3>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Product Name</label>
+              <input 
+                type="text" 
+                id="name" 
+                formControlName="name"
+                [class.error]="getFieldError('name')"
+                placeholder="Enter product name"
+              >
+              <div class="error-message">{{ getFieldError('name') }}</div>
+            </div>
+            
+            <div class="form-group">
+              <label for="brand">Brand</label>
+              <input 
+                type="text" 
+                id="brand" 
+                formControlName="brand"
+                [class.error]="getFieldError('brand')"
+                placeholder="Enter brand name"
+              >
+              <div class="error-message">{{ getFieldError('brand') }}</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea 
+              id="description" 
+              formControlName="description"
+              [class.error]="getFieldError('description')"
+              rows="4"
+              placeholder="Enter product description"
+            ></textarea>
+            <div class="error-message">{{ getFieldError('description') }}</div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3>Product Details</h3>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="price">Price ($)</label>
+              <input 
+                type="number" 
+                id="price" 
+                formControlName="price"
+                [class.error]="getFieldError('price')"
+                step="0.01"
+                placeholder="0.00"
+              >
+              <div class="error-message">{{ getFieldError('price') }}</div>
+            </div>
+            
+            <div class="form-group">
+              <label for="size">Size (ml)</label>
+              <input 
+                type="number" 
+                id="size" 
+                formControlName="size"
+                [class.error]="getFieldError('size')"
+                placeholder="Size in ml"
+              >
+              <div class="error-message">{{ getFieldError('size') }}</div>
+            </div>
+            
+            <div class="form-group">
+              <label for="stock">Stock Quantity</label>
+              <input 
+                type="number" 
+                id="stock" 
+                formControlName="stock"
+                [class.error]="getFieldError('stock')"
+                placeholder="Available quantity"
+              >
+              <div class="error-message">{{ getFieldError('stock') }}</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="image">Product Image URL</label>
+            <input 
+              type="url" 
+              id="image" 
+              formControlName="image"
+              [class.error]="getFieldError('image')"
+              placeholder="https://example.com/image.jpg"
+            >
+            <div class="error-message">{{ getFieldError('image') }}</div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" (click)="onReset()">
+            <i class="fas fa-undo"></i> Reset Form
+          </button>
+          <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid || isSubmitting">
+            <i class="fas fa-plus" *ngIf="!isSubmitting"></i>
+            <i class="fas fa-spinner fa-spin" *ngIf="isSubmitting"></i>
+            {{ isSubmitting ? 'Adding Product...' : 'Add Product' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
