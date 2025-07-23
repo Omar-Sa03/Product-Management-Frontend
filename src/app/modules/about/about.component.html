@@ -1,0 +1,180 @@
+<div class="about-container">
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">About Arome</h1>
+      <p class="hero-subtitle">Crafting exceptional fragrance experiences since 2020</p>
+      <div class="hero-description">
+        <p>Welcome to Arome, where passion meets perfection in the world of fragrances. 
+           We are dedicated to bringing you the finest collection of perfumes, carefully 
+           curated to suit every taste and occasion.</p>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="floating-perfume">
+        <i class="fas fa-spray-can"></i>
+      </div>
+    </div>
+  </section>
+
+  <section class="mission-section">
+    <div class="section-header">
+      <h2>Our Mission</h2>
+      <p class="section-subtitle">Bringing the world of luxury fragrances to your fingertips</p>
+    </div>
+    
+    <div class="mission-content">
+      <div class="mission-text">
+        <h3>Excellence in Every Drop</h3>
+        <p>At Arome, we believe that a fragrance is more than just a scent – it's a memory, 
+           an emotion, a statement. Our mission is to provide fragrance enthusiasts with 
+           access to the world's most exquisite perfumes, backed by expert knowledge and 
+           uncompromising quality standards.</p>
+        
+        <p>We meticulously select each fragrance in our collection, ensuring that every 
+           bottle represents the pinnacle of olfactory artistry. From timeless classics 
+           to contemporary masterpieces, our catalog spans the full spectrum of luxury fragrances.</p>
+      </div>
+      
+      <div class="mission-stats">
+        <div class="stat-grid">
+          <div class="stat-item" *ngFor="let stat of companyStats">
+            <div class="stat-number">{{ stat.number }}</div>
+            <div class="stat-label">{{ stat.label }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features-section">
+    <div class="section-header">
+      <h2>Why Choose Arome?</h2>
+      <p class="section-subtitle">What makes us your perfect fragrance partner</p>
+    </div>
+    
+    <div class="features-grid">
+      <div class="feature-card" *ngFor="let feature of features">
+        <div class="feature-icon">
+          <i [class]="feature.icon"></i>
+        </div>
+        <div class="feature-content">
+          <h3>{{ feature.title }}</h3>
+          <p>{{ feature.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="team-section">
+    <div class="section-header">
+      <h2>Meet Our Team</h2>
+      <p class="section-subtitle">The passionate people behind Arome</p>
+    </div>
+    
+    <div class="team-grid">
+      <div class="team-card" *ngFor="let member of teamMembers">
+        <div class="member-image">
+          <img [src]="member.image" [alt]="member.name" >
+          <div class="member-overlay">
+            <div class="social-links">
+              <a [href]="member.social.linkedin" target="_blank" class="social-link" *ngIf="member.social.linkedin">
+                <i class="fab fa-linkedin"></i>
+              </a>
+              <a [href]="member.social.facebook" target="_blank" class="social-link" *ngIf="member.social.facebook">
+                <i class="fab fa-facebook"></i>
+              </a>
+              <a [href]="'mailto:' + member.social.email" class="social-link" *ngIf="member.social.email">
+                <i class="fas fa-envelope"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="member-info">
+          <h3>{{ member.name }}</h3>
+          <p class="member-role">{{ member.role }}</p>
+          <p class="member-bio">{{ member.bio }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="values-section">
+    <div class="values-content">
+      <div class="values-text">
+        <h2>Our Values</h2>
+        <div class="value-list">
+          <div class="value-item">
+            <i class="fas fa-gem"></i>
+            <div>
+              <h4>Quality First</h4>
+              <p>We never compromise on the authenticity and quality of our fragrances.</p>
+            </div>
+          </div>
+          
+          <div class="value-item">
+            <i class="fas fa-handshake"></i>
+            <div>
+              <h4>Customer Trust</h4>
+              <p>Building lasting relationships through transparency and exceptional service.</p>
+            </div>
+          </div>
+          
+          <div class="value-item">
+            <i class="fas fa-leaf"></i>
+            <div>
+              <h4>Sustainability</h4>
+              <p>Committed to environmentally responsible practices in everything we do.</p>
+            </div>
+          </div>
+          
+          <div class="value-item">
+            <i class="fas fa-lightbulb"></i>
+            <div>
+              <h4>Innovation</h4>
+              <p>Continuously evolving to bring you the latest in fragrance technology and trends.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="values-visual">
+        <div class="perfume-bottle">
+          <i class="fas fa-flask"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section">
+    <div class="contact-card">
+      <h2>Get in Touch</h2>
+      <p>Have questions about our collection or need personalized recommendations?</p>
+      
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <div>
+            <h4>Email</h4>
+            <p>{{'medomarsagga@gmail.com'}}.com</p>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <div>
+            <h4>Phone</h4>
+            <p>29 656 436</p>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <div>
+            <h4>Address</h4>
+            <p>AddInn<br>Tozeur, Tunisia</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

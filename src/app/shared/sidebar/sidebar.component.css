@@ -15,7 +15,6 @@
   overflow: hidden;
 }
 
-/* Header Section */
 .sidebar-header {
   height: 50px;
   padding: 5px 20px;
@@ -228,7 +227,6 @@
   border-color: rgba(239, 68, 68, 0.5);
 }
 
-/* Scrollbar Styling */
 .sidebar-nav::-webkit-scrollbar {
   width: 6px;
 }
@@ -247,7 +245,6 @@
   background: rgba(102, 126, 234, 0.7);
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .sidebar {
     width: 100%;
@@ -273,7 +270,6 @@
   }
 }
 
-/* Dark theme enhancements */
 @media (prefers-color-scheme: dark) {
   .sidebar {
     background: linear-gradient(180deg, #405a94 0%, #1e293b 100%);
@@ -281,7 +277,6 @@
   
 }
 
-/* Animation for smooth transitions */
 @keyframes slideIn {
   from {
     opacity: 0;

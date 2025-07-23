@@ -13,7 +13,7 @@ export class PerfumeService {
       price: 120.00,
       size: 50,
       stock: 25,
-      image: 'https://fimgs.net/mdimg/perfume-thumbs/375x500.51423.jpg'
+      image: 'https://test'
     },
     {
       id: 2,

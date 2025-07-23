@@ -1,14 +1,40 @@
 <header class="header">
   <div class="container">
-    <nav class="nav-menu">
-    </nav>
-    <div class="nav-actions">
-      <div class="profile-dropdown">
-        <button class="profile-btn">
-          <i class="fas fa-user"></i>
-          <span>Sign up</span>
+    <!-- Search Section -->
+    <div class="search-section">
+      <div class="search-container">
+        <i class="fas fa-search search-icon"></i>
+        <input 
+          type="text" 
+          class="search-input" 
+          placeholder="Search perfumes, brands..." 
+          [(ngModel)]="searchValue"
+          (input)="onSearch($event)"
+          (keyup.enter)="onSearchSubmit()"
+        >
+        <button 
+          class="clear-search" 
+          *ngIf="searchValue" 
+          (click)="clearSearch()"
+          title="Clear search"
+        >
+          <i class="fas fa-times"></i>
         </button>
       </div>
+    </div>
+
+    <div class="nav-actions">
+      <button class="notification-btn" title="Notifications">
+        <i class="fas fa-bell"></i>
+        <span class="badge" *ngIf="notificationCount > 0">{{ notificationCount }}</span>
+      </button>
+
+      <div class="quick-actions">
+        <button class="action-btn" title="Add New Perfume" (click)="onAddPerfume()">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+
     </div>
   </div>
 </header>

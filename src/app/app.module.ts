@@ -12,11 +12,12 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AddProductComponent } from './modules/add-product/add-product.component';
+import { AboutComponent } from './modules/about/about.component';
 
 
 
 @NgModule({
-  declarations: [AppComponent,DashboardComponent, AddProductComponent],
+  declarations: [AppComponent,DashboardComponent, AddProductComponent, AboutComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
