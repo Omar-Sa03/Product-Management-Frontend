@@ -1,7 +1,7 @@
 <div class="container">
   <div class="add-product-container">
     <div class="page-header">
-      <h1>Add New Product</h1>
+      <h1>Add New Perfume</h1>
       <p>Fill in the details below to add a new perfume to your inventory</p>
     </div>
 
@@ -90,16 +90,51 @@
               <div class="error-message">{{ getFieldError('stock') }}</div>
             </div>
           </div>
+        </div>
 
+        <div class="form-section">
+          <h3>Product Image</h3>
+          
           <div class="form-group">
-            <label for="image">Product Image URL</label>
+            <label>Upload Product Image</label>
+            
             <input 
-              type="url" 
-              id="image" 
-              formControlName="image"
-              [class.error]="getFieldError('image')"
-              placeholder="https://example.com/image.jpg"
+              type="file" 
+              id="imageFile" 
+              accept="image/*"
+              (change)="onFileSelected($event)"
+              style="display: none;"
             >
+            
+            <div 
+              class="upload-area"
+              [class.drag-over]="dragOver"
+              [class.has-image]="imagePreview"
+              (click)="triggerFileInput()"
+              (dragover)="onDragOver($event)"
+              (dragleave)="onDragLeave($event)"
+              (drop)="onDrop($event)"
+            >
+              <div *ngIf="imagePreview" class="image-preview">
+                <img [src]="imagePreview" alt="Product preview">
+                <button 
+                  type="button" 
+                  class="remove-image-btn"
+                  (click)="removeImage(); $event.stopPropagation()"
+                  title="Remove image"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+              
+              <div *ngIf="!imagePreview" class="upload-placeholder">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h4>Upload Product Image</h4>
+                <p>Click to browse Images</p>
+                <p class="upload-info">Supports: JPG, PNG, GIF (Max 5MB)</p>
+              </div>
+            </div>
+            
             <div class="error-message">{{ getFieldError('image') }}</div>
           </div>
         </div>
@@ -108,7 +143,7 @@
           <button type="button" class="btn btn-secondary" (click)="onReset()">
             <i class="fas fa-undo"></i> Reset Form
           </button>
-          <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid || isSubmitting">
+          <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid || !selectedFile || isSubmitting">
             <i class="fas fa-plus" *ngIf="!isSubmitting"></i>
             <i class="fas fa-spinner fa-spin" *ngIf="isSubmitting"></i>
             {{ isSubmitting ? 'Adding Product...' : 'Add Product' }}

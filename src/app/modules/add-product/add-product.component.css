@@ -18,7 +18,7 @@
 
 .page-header h1 {
   font-size: 2.5rem;
-  color: #2c3e50;
+  color: #41729F;
   margin-bottom: 10px;
   font-weight: 600;
 }
@@ -43,7 +43,7 @@
 
 .form-section h3 {
   font-size: 1.4rem;
-  color: #495057;
+  color: #055C9D;
   margin-bottom: 20px;
   padding-bottom: 10px;
   border-bottom: 2px solid #e9ecef;
@@ -68,7 +68,7 @@
   display: block;
   margin-bottom: 8px;
   font-weight: 500;
-  color: #495057;
+  color: #41729F;
   font-size: 0.95rem;
 }
 
@@ -113,6 +113,109 @@
 .form-group input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.upload-area {
+  border: 2px dashed #e9ecef;
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #f8f9fa;
+  position: relative;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-area:hover {
+  border-color: #007bff;
+  background-color: #f0f8ff;
+}
+
+.upload-area.drag-over {
+  border-color: #007bff;
+  background-color: #e3f2fd;
+  transform: scale(1.02);
+}
+
+.upload-area.has-image {
+  padding: 20px;
+  border: 2px solid #28a745;
+  background-color: #f8fff9;
+}
+
+.upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.upload-placeholder i {
+  font-size: 3rem;
+  color: #6c757d;
+  margin-bottom: 10px;
+}
+
+.upload-placeholder h4 {
+  font-size: 1.3rem;
+  color: #495057;
+  margin: 0;
+  font-weight: 600;
+}
+
+.upload-placeholder p {
+  color: #6c757d;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.upload-placeholder .upload-info {
+  font-size: 0.85rem;
+  color: #adb5bd;
+}
+
+.image-preview {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.image-preview img {
+  max-width: 300px;
+  max-height: 200px;
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+}
+
+.remove-image-btn {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.remove-image-btn:hover {
+  background: #c82333;
+  transform: scale(1.1);
 }
 
 .error-message {
@@ -188,7 +291,6 @@
   100% { transform: rotate(360deg); }
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .add-product-container {
     padding: 15px;
@@ -214,6 +316,24 @@
   .btn {
     width: 100%;
   }
+  
+  .upload-area {
+    padding: 30px 15px;
+    min-height: 160px;
+  }
+  
+  .upload-placeholder i {
+    font-size: 2.5rem;
+  }
+  
+  .upload-placeholder h4 {
+    font-size: 1.1rem;
+  }
+  
+  .image-preview img {
+    max-width: 250px;
+    max-height: 160px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -232,5 +352,27 @@
   .form-group input,
   .form-group textarea {
     padding: 10px 12px;
+  }
+  
+  .upload-area {
+    padding: 20px 10px;
+    min-height: 140px;
+  }
+  
+  .upload-placeholder i {
+    font-size: 2rem;
+  }
+  
+  .upload-placeholder h4 {
+    font-size: 1rem;
+  }
+  
+  .upload-placeholder p {
+    font-size: 0.9rem;
+  }
+  
+  .image-preview img {
+    max-width: 200px;
+    max-height: 120px;
   }
 }

@@ -14,6 +14,9 @@ export class DashboardComponent implements OnInit {
   isEditing = false;
   editingId: number | null = null;
   showForm = false;
+  selectedFile: File | null = null;
+  imagePreview: string | null = null;
+  dragOver = false;
 
   constructor(
     private perfumeService: PerfumeService,
@@ -26,12 +29,76 @@ export class DashboardComponent implements OnInit {
       price: [0, [Validators.required, Validators.min(0)]],
       size: [0, [Validators.required, Validators.min(0)]],
       stock: [0, [Validators.required, Validators.min(0)]],
-      image: ['', [Validators.required, Validators.pattern(/^https?:\/\/.+/)]]
+      image: ['', [Validators.required]]
     });
   }
 
   ngOnInit(): void {
     this.loadPerfumes();
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.handleFileSelection(input.files[0]);
+    }
+  }
+
+  onDragOver(event: DragEvent): void {
+    event.preventDefault();
+    this.dragOver = true;
+  }
+
+  onDragLeave(event: DragEvent): void {
+    event.preventDefault();
+    this.dragOver = false;
+  }
+
+  onDrop(event: DragEvent): void {
+    event.preventDefault();
+    this.dragOver = false;
+    
+    if (event.dataTransfer?.files && event.dataTransfer.files.length > 0) {
+      this.handleFileSelection(event.dataTransfer.files[0]);
+    }
+  }
+
+  private handleFileSelection(file: File): void {
+    if (!file.type.startsWith('image/')) {
+      alert('Please select a valid image file.');
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      alert('File size must be less than 5MB.');
+      return;
+    }
+
+    this.selectedFile = file;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      this.imagePreview = e.target?.result as string;
+      this.perfumeForm.patchValue({ image: file.name });
+    };
+    reader.readAsDataURL(file);
+  }
+
+  triggerFileInput(): void {
+    const fileInput = document.getElementById('imageFile') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.click();
+    }
+  }
+
+  removeImage(): void {
+    this.selectedFile = null;
+    this.imagePreview = null;
+    this.perfumeForm.patchValue({ image: '' });
+    
+    const fileInput = document.getElementById('imageFile') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = '';
+    }
   }
 
   loadPerfumes(): void {
@@ -57,25 +124,40 @@ export class DashboardComponent implements OnInit {
     this.isEditing = false;
     this.editingId = null;
     this.perfumeForm.reset();
+    this.selectedFile = null;
+    this.imagePreview = null;
   }
 
   onSubmit(): void {
     if (this.perfumeForm.valid) {
-      const perfumeData = this.perfumeForm.value;
+      const perfumeData = { ...this.perfumeForm.value };
       
-      if (this.isEditing && this.editingId) {
-        this.perfumeService.updatePerfume(this.editingId, { ...perfumeData, id: this.editingId })
-          .subscribe(() => {
-            this.loadPerfumes();
-            this.closeForm();
-          });
+      if (this.selectedFile) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          perfumeData.image = reader.result as string;
+          this.submitPerfume(perfumeData);
+        };
+        reader.readAsDataURL(this.selectedFile);
       } else {
-        this.perfumeService.createPerfume(perfumeData)
-          .subscribe(() => {
-            this.loadPerfumes();
-            this.closeForm();
-          });
+        this.submitPerfume(perfumeData);
       }
+    }
+  }
+
+  private submitPerfume(perfumeData: any): void {
+    if (this.isEditing && this.editingId) {
+      this.perfumeService.updatePerfume(this.editingId, { ...perfumeData, id: this.editingId })
+        .subscribe(() => {
+          this.loadPerfumes();
+          this.closeForm();
+        });
+    } else {
+      this.perfumeService.createPerfume(perfumeData)
+        .subscribe(() => {
+          this.loadPerfumes();
+          this.closeForm();
+        });
     }
   }
 
@@ -84,6 +166,7 @@ export class DashboardComponent implements OnInit {
     this.editingId = perfume.id;
     this.showForm = true;
     this.perfumeForm.patchValue(perfume);
+    this.imagePreview = perfume.image;
   }
 
   deletePerfume(id: number): void {
@@ -104,4 +187,5 @@ export class DashboardComponent implements OnInit {
     }
     return '';
   }
+  
 }
