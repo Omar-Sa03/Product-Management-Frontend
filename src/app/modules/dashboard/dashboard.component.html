@@ -6,7 +6,7 @@
     </div>
     <div class="stats-summary">
       <div class="stat-card">
-        <div class="stat-number">{{ Perfumes.length }}</div>
+        <div class="stat-number">{{ perfumes.length }}</div>
         <div class="stat-label">Total Products</div>
       </div>
       <div class="stat-card">
@@ -137,7 +137,7 @@
               <div *ngIf="!imagePreview" class="upload-placeholder">
                 <i class="fas fa-cloud-upload-alt"></i>
                 <h4>Upload Product Image</h4>
-                <p>Click to browse Images</p>
+                <p>Drag and Drop or Click to browse Images</p>
                 <p class="upload-info">Supports: JPG, PNG, GIF (Max 5MB)</p>
               </div>
             </div>
@@ -164,7 +164,7 @@
     </div>
     
     <div class="perfumes-grid">
-      <div class="perfume-card" *ngFor="let perfume of Perfumes">
+      <div class="perfume-card" *ngFor="let perfume of perfumes">
         <div class="perfume-image">
           <img [src]="perfume.image" [alt]="perfume.name">
           <div class="image-overlay">
@@ -201,7 +201,7 @@
       </div>
     </div>
     
-    <div class="no-results" *ngIf="Perfumes.length === 0">
+    <div class="no-results" *ngIf="perfumes.length === 0">
       <div class="empty-state">
         <i class="fas fa-spray-can"></i>
         <h3>No perfumes found</h3>

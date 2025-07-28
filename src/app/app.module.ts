@@ -7,6 +7,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { SharedModule } from './shared/shared.module';
@@ -28,7 +29,8 @@ import { AboutComponent } from './modules/about/about.component';
     ReactiveFormsModule,
     TableModule,
     SharedModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

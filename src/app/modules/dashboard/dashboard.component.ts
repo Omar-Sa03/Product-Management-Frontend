@@ -37,6 +37,71 @@ export class DashboardComponent implements OnInit {
     this.loadPerfumes();
   }
 
+  loadPerfumes(): void {
+    this.perfumeService.getAllPerfumes().subscribe(
+      perfumes => this.perfumes = perfumes
+    );
+  }
+
+  getTotalStock(): number {
+    return this.perfumes.reduce((total, perfume) => total + perfume.stock, 0);
+  }
+
+  getTotalValue(): number {
+    return this.perfumes.reduce((total, perfume) => total + (perfume.price * perfume.stock), 0);
+  }
+
+  closeForm(): void {
+    this.showForm = false;
+    this.isEditing = false;
+    this.editingId = null;
+    this.perfumeForm.reset();
+    this.selectedFile = null;
+    this.imagePreview = null;
+  }
+
+  onSubmit(): void {
+    if (this.perfumeForm.valid) {
+      const perfumeData = { ...this.perfumeForm.value };
+      
+      if (this.selectedFile) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          perfumeData.image = reader.result as string;
+          this.submitPerfume(perfumeData);
+        };
+        reader.readAsDataURL(this.selectedFile);
+      } else {
+        this.submitPerfume(perfumeData);
+      }
+    }
+  }
+
+  private submitPerfume(perfumeData: any): void {
+    if (this.isEditing && this.editingId) {
+      this.perfumeService.updatePerfume(this.editingId, { ...perfumeData, id: this.editingId })
+        .subscribe(() => {
+          this.loadPerfumes();
+          this.closeForm();
+        });
+    } 
+  }
+
+  editPerfume(perfume: Perfume): void {
+    this.isEditing = true;
+    this.editingId = perfume.id;
+    this.showForm = true;
+    this.perfumeForm.patchValue(perfume);
+    this.imagePreview = perfume.image;
+  }
+
+  deletePerfume(id: number): void {
+    if (confirm('Are you sure you want to delete this perfume?')) {
+      this.perfumeService.deletePerfume(id).subscribe(() => {
+        this.loadPerfumes();
+      });
+    }
+  }
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
@@ -98,82 +163,6 @@ export class DashboardComponent implements OnInit {
     const fileInput = document.getElementById('imageFile') as HTMLInputElement;
     if (fileInput) {
       fileInput.value = '';
-    }
-  }
-
-  loadPerfumes(): void {
-    this.perfumeService.getAllPerfumes().subscribe(
-      perfumes => this.perfumes = perfumes
-    );
-  }
-
-  get Perfumes(): Perfume[] {
-    return this.perfumes;
-  }
-
-  getTotalStock(): number {
-    return this.perfumes.reduce((total, perfume) => total + perfume.stock, 0);
-  }
-
-  getTotalValue(): number {
-    return this.perfumes.reduce((total, perfume) => total + (perfume.price * perfume.stock), 0);
-  }
-
-  closeForm(): void {
-    this.showForm = false;
-    this.isEditing = false;
-    this.editingId = null;
-    this.perfumeForm.reset();
-    this.selectedFile = null;
-    this.imagePreview = null;
-  }
-
-  onSubmit(): void {
-    if (this.perfumeForm.valid) {
-      const perfumeData = { ...this.perfumeForm.value };
-      
-      if (this.selectedFile) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          perfumeData.image = reader.result as string;
-          this.submitPerfume(perfumeData);
-        };
-        reader.readAsDataURL(this.selectedFile);
-      } else {
-        this.submitPerfume(perfumeData);
-      }
-    }
-  }
-
-  private submitPerfume(perfumeData: any): void {
-    if (this.isEditing && this.editingId) {
-      this.perfumeService.updatePerfume(this.editingId, { ...perfumeData, id: this.editingId })
-        .subscribe(() => {
-          this.loadPerfumes();
-          this.closeForm();
-        });
-    } else {
-      this.perfumeService.createPerfume(perfumeData)
-        .subscribe(() => {
-          this.loadPerfumes();
-          this.closeForm();
-        });
-    }
-  }
-
-  editPerfume(perfume: Perfume): void {
-    this.isEditing = true;
-    this.editingId = perfume.id;
-    this.showForm = true;
-    this.perfumeForm.patchValue(perfume);
-    this.imagePreview = perfume.image;
-  }
-
-  deletePerfume(id: number): void {
-    if (confirm('Are you sure you want to delete this perfume?')) {
-      this.perfumeService.deletePerfume(id).subscribe(() => {
-        this.loadPerfumes();
-      });
     }
   }
 
