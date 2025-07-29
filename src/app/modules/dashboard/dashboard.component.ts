@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PerfumeService } from '../../core/services/perfume.service';
 import { Perfume } from '../../core/models/perfume.model';
+import { AppComponent } from '../../app.component';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -9,6 +13,7 @@ import { Perfume } from '../../core/models/perfume.model';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  searchTerm = '';
   perfumes: Perfume[] = [];
   perfumeForm: FormGroup;
   isEditing = false;
@@ -17,10 +22,13 @@ export class DashboardComponent implements OnInit {
   selectedFile: File | null = null;
   imagePreview: string | null = null;
   dragOver = false;
+  filteredPerfumes: Perfume[] = [];
+  private destroy$ = new Subject<void>();
 
   constructor(
     private perfumeService: PerfumeService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private app: AppComponent 
   ) {
     this.perfumeForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
@@ -35,11 +43,23 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadPerfumes();
+    this.app.search$.subscribe(term => this.applyFilter(term));
   }
-
+  private applyFilter(term: string): void {
+    if (!term) {
+      this.filteredPerfumes = [...this.perfumes];
+    } else {
+      this.filteredPerfumes = this.perfumes.filter(
+        p =>
+          p.name.toLowerCase().includes(term) ||
+          p.brand.toLowerCase().includes(term)
+      );
+    }
+  }
   loadPerfumes(): void {
     this.perfumeService.getAllPerfumes().subscribe(
-      perfumes => this.perfumes = perfumes
+      perfumes =>{ this.perfumes = perfumes;
+      this.applyFilter('');}
     );
   }
 

@@ -164,7 +164,7 @@
     </div>
     
     <div class="perfumes-grid">
-      <div class="perfume-card" *ngFor="let perfume of perfumes">
+      <div class="perfume-card" *ngFor="let perfume of filteredPerfumes">
         <div class="perfume-image">
           <img [src]="perfume.image" [alt]="perfume.name">
           <div class="image-overlay">
@@ -200,8 +200,7 @@
         </div>
       </div>
     </div>
-    
-    <div class="no-results" *ngIf="perfumes.length === 0">
+    <div class="no-results" *ngIf="filteredPerfumes.length === 0 || perfumes.length === 0">
       <div class="empty-state">
         <i class="fas fa-spray-can"></i>
         <h3>No perfumes found</h3>

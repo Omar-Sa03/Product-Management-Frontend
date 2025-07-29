@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @Output() mobileMenuToggled = new EventEmitter<void>();
 
   searchValue: string = '';
-  notificationCount: number = 3; 
+  notificationCount: number = 0; 
   isSearching: boolean = false;
 
   private searchSubject = new Subject<string>();
