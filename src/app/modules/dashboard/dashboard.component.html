@@ -159,7 +159,7 @@
   <div class="perfumes-section">
     <div class="section-header">
       <h2>My Collection</h2>
-      <!-- New View Toggle Button -->
+      
       <div class="view-controls">
         <button 
           class="view-toggle-btn" 
@@ -171,7 +171,6 @@
       </div>
     </div>
     
-    <!-- Card View -->
     <div class="perfumes-grid" *ngIf="isCardView">
       <div class="perfume-card" *ngFor="let perfume of filteredPerfumes">
         <div class="perfume-image">
@@ -210,7 +209,6 @@
       </div>
     </div>
 
-    <!-- Table View -->
     <div class="table-container" *ngIf="!isCardView">
       <table class="perfume-table">
         <thead>

@@ -103,6 +103,7 @@
               id="imageFile" 
               accept="image/*"
               (change)="onFileSelected($event)"
+              style="display: none;"
               >
             
             <div 
@@ -113,7 +114,7 @@
               (dragover)="onDragOver($event)"
               (dragleave)="onDragLeave($event)"
               (drop)="onDrop($event)"
-              style="display: none;">
+              >
 
               <div *ngIf="imagePreview" class="image-preview">
                 <img [src]="imagePreview" alt="Product preview">
