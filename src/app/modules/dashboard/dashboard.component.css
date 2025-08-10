@@ -88,6 +88,38 @@
   font-weight: 600;
 }
 
+/* New View Controls Styling */
+.view-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.view-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.view-toggle-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.view-toggle-btn i {
+  font-size: 16px;
+}
+
 .btn {
   padding: 10px 20px;
   border: none;
@@ -441,6 +473,204 @@ form {
   color: #dc3545;
 }
 
+/* Table View Styles */
+.table-container {
+  overflow-x: auto;
+  margin-top: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.perfume-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.perfume-table thead {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.perfume-table th {
+  padding: 20px 15px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: none;
+}
+
+.perfume-table th:first-child {
+  border-radius: 15px 0 0 0;
+}
+
+.perfume-table th:last-child {
+  border-radius: 0 15px 0 0;
+}
+
+.table-row {
+  transition: all 0.3s ease;
+  border-bottom: 1px solid #f1f3f4;
+}
+
+.table-row:hover {
+  background: #f8f9fa;
+  transform: scale(1.01);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.perfume-table td {
+  padding: 20px 15px;
+  vertical-align: middle;
+  border: none;
+}
+
+.image-cell {
+  width: 80px;
+}
+
+.table-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.name-cell {
+  min-width: 150px;
+}
+
+.perfume-name {
+  font-weight: 600;
+  color: #333;
+  font-size: 16px;
+}
+
+.brand-cell {
+  min-width: 120px;
+}
+
+.brand-badge {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.description-cell {
+  max-width: 300px;
+  min-width: 200px;
+}
+
+.table-description {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.size-cell {
+  min-width: 80px;
+  text-align: center;
+}
+
+.size-value {
+  background: #f8f9fa;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-weight: 500;
+  color: #667eea;
+  font-size: 13px;
+}
+
+.price-cell {
+  min-width: 100px;
+}
+
+.price-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #667eea;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stock-cell {
+  min-width: 80px;
+  text-align: center;
+}
+
+.stock-badge {
+  background: #d4edda;
+  color: #155724;
+  padding: 6px 12px;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.stock-badge.low-stock {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.actions-cell {
+  min-width: 120px;
+}
+
+.table-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.table-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: none;
+  background: #f8f9fa;
+  color: #666;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.table-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.table-btn.edit-btn:hover {
+  background: #007bff;
+  color: white;
+}
+
+.table-btn.delete-btn:hover {
+  background: #dc3545;
+  color: white;
+}
+
 .no-results {
   text-align: center;
   padding: 60px 20px;
@@ -504,9 +734,13 @@ form {
     text-align: center;
   }
   
-  .filter-controls {
+  .view-controls {
     justify-content: center;
-    flex-wrap: wrap;
+  }
+  
+  .view-toggle-btn {
+    padding: 12px 20px;
+    font-size: 16px;
   }
   
   .form-row {
@@ -538,7 +772,27 @@ form {
     height: 40px;
     font-size: 14px;
   }
+  
+  /* Table responsive styles */
+  .table-container {
+    font-size: 12px;
+  }
+  
+  .perfume-table th,
+  .perfume-table td {
+    padding: 10px 8px;
+  }
+  
+  .table-image {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .table-description {
+    max-width: 150px;
+  }
 }
+
 .upload-area {
   border: 2px dashed #e9ecef;
   border-radius: 12px;

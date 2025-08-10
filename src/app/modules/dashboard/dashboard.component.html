@@ -159,9 +159,20 @@
   <div class="perfumes-section">
     <div class="section-header">
       <h2>My Collection</h2>
+      <!-- New View Toggle Button -->
+      <div class="view-controls">
+        <button 
+          class="view-toggle-btn" 
+          (click)="toggleView()"
+          [title]="isCardView ? 'Switch to Table View' : 'Switch to Card View'">
+          <i [class]="isCardView ? 'fas fa-table' : 'fas fa-th-large'"></i>
+          <span>{{ isCardView ? 'Table View' : 'Card View' }}</span>
+        </button>
+      </div>
     </div>
     
-    <div class="perfumes-grid">
+    <!-- Card View -->
+    <div class="perfumes-grid" *ngIf="isCardView">
       <div class="perfume-card" *ngFor="let perfume of filteredPerfumes">
         <div class="perfume-image">
           <img [src]="perfume.image" [alt]="perfume.name">
@@ -198,6 +209,62 @@
         </div>
       </div>
     </div>
+
+    <!-- Table View -->
+    <div class="table-container" *ngIf="!isCardView">
+      <table class="perfume-table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Description</th>
+            <th>Size</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let perfume of filteredPerfumes" class="table-row">
+            <td class="image-cell">
+              <img [src]="perfume.image" [alt]="perfume.name" class="table-image">
+            </td>
+            <td class="name-cell">
+              <span class="perfume-name">{{ perfume.name }}</span>
+            </td>
+            <td class="brand-cell">
+              <span class="brand-badge">{{ perfume.brand }}</span>
+            </td>
+            <td class="description-cell">
+              <span class="table-description">{{ perfume.description }}</span>
+            </td>
+            <td class="size-cell">
+              <span class="size-value">{{ perfume.size }}ml</span>
+            </td>
+            <td class="price-cell">
+              <span class="price-value">${{ perfume.price }}</span>
+            </td>
+            <td class="stock-cell">
+              <span class="stock-badge" [class.low-stock]="perfume.stock < 10">
+                {{ perfume.stock }}
+              </span>
+            </td>
+            <td class="actions-cell">
+              <div class="table-actions">
+                <button class="table-btn edit-btn" (click)="editPerfume(perfume)" title="Edit">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button class="table-btn delete-btn" (click)="deletePerfume(perfume.id)" title="Delete">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
     <div class="no-results" *ngIf="filteredPerfumes.length === 0 || perfumes.length === 0">
       <div class="empty-state">
         <i class="fas fa-spray-can"></i>

@@ -23,6 +23,9 @@ export class DashboardComponent implements OnInit {
   dragOver = false;
   filteredPerfumes: Perfume[] = [];
   private destroy$ = new Subject<void>();
+  
+  // New property for layout toggle
+  isCardView = true;
 
   constructor(
     private perfumeService: PerfumeService,
@@ -44,6 +47,12 @@ export class DashboardComponent implements OnInit {
     this.loadPerfumes();
     this.app.search$.subscribe(term => this.applyFilter(term));
   }
+
+  // New method to toggle view
+  toggleView(): void {
+    this.isCardView = !this.isCardView;
+  }
+
   private applyFilter(term: string): void {
     if (!term) {
       this.filteredPerfumes = [...this.perfumes];
