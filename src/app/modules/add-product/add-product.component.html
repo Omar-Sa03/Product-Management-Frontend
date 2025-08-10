@@ -103,8 +103,7 @@
               id="imageFile" 
               accept="image/*"
               (change)="onFileSelected($event)"
-              style="display: none;"
-            >
+              >
             
             <div 
               class="upload-area"
@@ -114,15 +113,16 @@
               (dragover)="onDragOver($event)"
               (dragleave)="onDragLeave($event)"
               (drop)="onDrop($event)"
-            >
+              style="display: none;">
+
               <div *ngIf="imagePreview" class="image-preview">
                 <img [src]="imagePreview" alt="Product preview">
                 <button 
                   type="button" 
                   class="remove-image-btn"
                   (click)="removeImage(); $event.stopPropagation()"
-                  title="Remove image"
-                >
+                  title="Remove image">
+                  
                   <i class="fas fa-times"></i>
                 </button>
               </div>

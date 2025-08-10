@@ -40,25 +40,6 @@ export class AddProductComponent {
     }
   }
 
-  onDragOver(event: DragEvent): void {
-    event.preventDefault();
-    this.dragOver = true;
-  }
-
-  onDragLeave(event: DragEvent): void {
-    event.preventDefault();
-    this.dragOver = false;
-  }
-
-  onDrop(event: DragEvent): void {
-    event.preventDefault();
-    this.dragOver = false;
-    
-    if (event.dataTransfer?.files && event.dataTransfer.files.length > 0) {
-      this.handleFileSelection(event.dataTransfer.files[0]);
-    }
-  }
-
   private handleFileSelection(file: File): void {
     if (!file.type.startsWith('image/')) {
       alert('Please select a valid image file.');
@@ -100,7 +81,6 @@ export class AddProductComponent {
   onSubmit(): void {
     if (this.productForm.valid && this.selectedFile) {
       this.isSubmitting = true;
-      
       const reader = new FileReader();
       reader.onload = () => {
         const productData = {
@@ -125,6 +105,24 @@ export class AddProductComponent {
         });
       };
       reader.readAsDataURL(this.selectedFile);
+    }
+  }
+  onDragOver(event: DragEvent): void {
+    event.preventDefault();
+    this.dragOver = true;
+  }
+
+  onDragLeave(event: DragEvent): void {
+    event.preventDefault();
+    this.dragOver = false;
+  }
+
+  onDrop(event: DragEvent): void {
+    event.preventDefault();
+    this.dragOver = false;
+    
+    if (event.dataTransfer?.files && event.dataTransfer.files.length > 0) {
+      this.handleFileSelection(event.dataTransfer.files[0]);
     }
   }
 

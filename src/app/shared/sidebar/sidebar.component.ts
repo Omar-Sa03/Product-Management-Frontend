@@ -23,11 +23,6 @@ export class SidebarComponent {
       icon: 'fas fa-plus-circle'
     },
     {
-      label: 'Notifications',
-      route: 'Notifications',
-      icon: 'fa-regular fa-bell'
-    },
-    {
       label: 'About',
       route: 'about',
       icon: 'fa-solid fa-question'

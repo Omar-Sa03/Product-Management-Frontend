@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PerfumeService } from '../../core/services/perfume.service';
 import { Perfume } from '../../core/models/perfume.model';
 import { AppComponent } from '../../app.component';
-import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 
