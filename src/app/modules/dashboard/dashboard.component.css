@@ -88,7 +88,7 @@
   font-weight: 600;
 }
 
-/* New View Controls Styling */
+
 .view-controls {
   display: flex;
   gap: 10px;
@@ -560,8 +560,7 @@ form {
 }
 
 .brand-badge {
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
+  color: rgb(42, 42, 42);
   padding: 6px 12px;
   border-radius: 20px;
   font-size: 12px;

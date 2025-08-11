@@ -48,7 +48,6 @@ export class DashboardComponent implements OnInit {
     this.app.search$.subscribe(term => this.applyFilter(term));
   }
 
-  // New method to toggle view
   toggleView(): void {
     this.isCardView = !this.isCardView;
   }
