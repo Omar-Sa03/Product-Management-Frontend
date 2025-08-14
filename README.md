@@ -20,20 +20,21 @@ For Docker Compose to work, you need to have **both frontend and backend reposit
 
 ## 🛠 Clone Repositories
 
+```bash
 # Clone the frontend (this repo)
-
-`git clone https://github.com/<Omar-Sa03>/Product-Management-Frontend.git`
+git clone https://github.com/<Omar-Sa03>/Product-Management-Frontend.git
 
 # Clone the backend
+git clone https://github.com/<Omar-Sa03>/Product-Management-Backend.git
+```
 
-`git clone https://github.com/<Omar-Sa03>/Product-Management-Backend.git`
+## 🐳 Docker Compose File
 
-# Docker Compose File
+Save the following content as `docker-compose.yml` in the parent folder containing both repos:
 
-Save the following content as docker-compose.yml in the parent folder containing both repos:
-
+```yaml
 version: '3.8'
- 
+
 services:
   db:
     image: postgres:16-alpine
@@ -46,7 +47,7 @@ services:
       - "5432:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
- 
+
   api:
     build:
       context: ./Product-Management-Backend
@@ -60,11 +61,11 @@ services:
       - PG_DATABASE=Perfume_DB
       - PG_USERNAME=postgres
       - PG_PASSWORD=postgres
- 
+
   app:
     build:
       context: ./Product-Management-Frontend
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     ports:
       - "4200:4200"
     depends_on:
@@ -72,28 +73,32 @@ services:
 
 volumes:
   db-data:
+```
 
-# 🚀 How to Run the Application
+## 🚀 How to Run the Application
 
-## 1️⃣ Navigate to the parent folder containing both frontend and backend repos.
+### 1️⃣ Navigate to the parent folder containing both frontend and backend repos
 
-`cd path/to/project-folder`
+```bash
+cd path/to/project-folder
+```
 
-## ️⃣ Build and start the containers:
+### 2️⃣ Build and start the containers
 
-`docker compose up --build`
+```bash
+docker compose up --build
+```
 
+### 3️⃣ Access the app
 
-## 3️⃣ Access the app:
+- **Frontend (Angular)** → http://localhost:4200
+- **Backend API (ASP.NET Core)** → http://localhost:44395
+- **Database (PostgreSQL)** → Port 5432 (default credentials in docker-compose.yml)
 
-Frontend (Angular) → http://localhost:4200
-
-Backend API (ASP.NET Core) → http://localhost:44395
-
-Database (PostgreSQL) → Port 5432 (default credentials in docker-compose.yml)
-
-🛑 Stopping the Application
+## 🛑 Stopping the Application
 
 To stop all running containers:
 
-`docker compose down`
+```bash
+docker compose down
+```
