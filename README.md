@@ -96,4 +96,4 @@ Database (PostgreSQL) → Port 5432 (default credentials in docker-compose.yml)
 
 To stop all running containers:
 
-docker compose down
+`docker compose down`
